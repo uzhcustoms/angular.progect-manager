@@ -1,0 +1,77 @@
+<div class="tasks">
+    <h3>{{progects[tasksService.idxProgect].name}}</h3>
+
+    <h4>Tasks</h4>
+
+    <table *ngIf="progects[tasksService.idxProgect].tasks.length > 0">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Comment</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of progects[tasksService.idxProgect].tasks">
+                <td class="name-task"> {{ task.name }}
+                </td>
+                <td> {{ task.description }} </td>
+                <td> {{ task.comments }} </td>
+                <td> <button (click)="editTasks(task)">Edit</button><button (click)="removeTasks(task)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form *ngIf="!toggleEditTask" id="formEditTask" (ngSubmit)="onSubmitEditTasks($event)">
+        <p class="title-task">Edit task</p>
+        <div class="edit-task">
+            <div class="flex-input">
+                <label for="editNameTask">Name</label>
+                <input id="editNameTask" type="text" [(ngModel)]="editNameTasks" name="editNameTasks"
+                    placeholder="Task name">
+            </div>
+
+            <div class="flex-input">
+                <label for="editDescriptionTask">Description</label>
+                <input id="editDescriptionTask" type="text" [(ngModel)]="editDescriptionTasks"
+                    name="editDescriptionTasks" placeholder="Task description">
+            </div>
+
+            <div class="flex-input">
+                <label for="editCommentsTask">Comments</label>
+                <input id="editCommentsTask" type="text" [(ngModel)]="editCommentsTasks" name="editCommentsTasks"
+                    placeholder="Task comments">
+            </div>
+
+            <input id="btnEditTask" type="submit" value="Save" (click)="onSubmitEditTasks($event)">
+        </div>
+    </form>
+
+    <form *ngIf="toggleEditTask" id="formCreateTask" (ngSubmit)="onSubmitCreateTask($event)">
+        <p class="title-task">Create new task</p>
+        <div class="new-task">
+            <div class="flex-input">
+                <label for="nameTask">Name</label>
+                <input id="nameTask" type="text" placeholder="Task name" [(ngModel)]="inputNameTask"
+                    name="inputNameTask">
+            </div>
+
+            <div class="flex-input">
+                <label for="descriptionTask">Description</label>
+                <input id="descriptionTask" type="text" placeholder="Task description"
+                    [(ngModel)]="inputDescriptionTask" name="inputDescriptionTask">
+            </div>
+
+            <div class="flex-input">
+                <label for="inputCommentsTask">Comments</label>
+                <input id="inputCommentsTask" type="text" [(ngModel)]="inputCommentsTasks" name="inputCommentsTasks"
+                    placeholder="Task comments">
+            </div>
+
+            <input id="btnSaveTask" type="submit" value="Save" (click)="onSubmitCreateTask($event)">
+        </div>
+
+    </form>
+</div>
