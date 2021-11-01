@@ -25,6 +25,7 @@ export class ProgectsComponent implements OnInit {
   currentProject:Progect=new Progect();
   editingProject:Progect=new Progect();
   path: string = 'tasks';
+  testGit: string = '';
 
 
   constructor(private progectsService: ProgectsService,
