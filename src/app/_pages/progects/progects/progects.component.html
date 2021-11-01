@@ -24,10 +24,10 @@
         <p class="title-progect">Edit progect</p>
         <div class="edit-progect">
             <label for="editNameProgect">Name</label>
-            <input id="editNameProgect" type="text" [(ngModel)]="editName" name="editName" placeholder="Progect name">
+            <input id="editNameProgect" type="text" [(ngModel)]="editingProject.name" name="editName" placeholder="Progect name">
 
             <label for="editDescriptionProgect">Description</label>
-            <input id="editDescriptionProgect" type="text" [(ngModel)]="editDescription" name="editDescription"
+            <input id="editDescriptionProgect" type="text" [(ngModel)]="editingProject.description" name="editDescription"
                 placeholder="Progect description">
 
             <input id="btnEdit" type="submit" value="Save" (click)="onSubmitEditProduct($event)">

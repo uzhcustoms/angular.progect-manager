@@ -15,25 +15,40 @@ export class ProgectsComponent implements OnInit {
 
   idxProgect: number = 0;
 
-  progects: any;
+  progects: Progect[]=[];
   inputNameProgect: string = '';
   inputDescriptionProgect: string = '';
   toggleEditProgect: boolean = true;
   editName: string = "";
   editDescription: string = "";
   editIdx: number = 0;
-
+  currentProject:Progect=new Progect();
+  editingProject:Progect=new Progect();
   path: string = 'tasks';
 
 
   constructor(private progectsService: ProgectsService,
     private router: Router,
-    private tasksService: TasksService) { }
+    private tasksService: TasksService) { 
+      this.getProgects();
 
+    }
+
+ngOnInit(): void {
+    
+
+    console.log(this.progects);
+    // this.progectsService.passedData.next(this.idxProgect);
+    // this.progectsService.set('progects', this.progects).subscribe((data: any) => {
+    //   console.log(data);
+    // });
+    localStorage.setItem('progects', JSON.stringify(Progects));
+  }
 
   getProgects(): void {
     this.progectsService.getProgects().subscribe(data => this.progects = data);
   }
+
   // getIdxProgect(): any {
   //   return this.idxProgect;
   // }
@@ -46,19 +61,23 @@ export class ProgectsComponent implements OnInit {
   //   const myData = this.progectsService.get('progects');
   // }
 
-  removeProgect(item: any) {
+  removeProgect(item: Progect) {
     let index = this.progects.indexOf(item);
     this.progects.splice(index, 1);
     this.toggleEditProgect = true;
   }
 
-  editProgect(item: any) {
+  editProgect(item: Progect) {
     this.toggleEditProgect = false;
-    this.editIdx = this.progects.indexOf(item);
+
+    this.currentProject = item;
+    this.editingProject=item;
+    /*this.editIdx = this.progects.indexOf(item);
     this.editName = this.progects[this.editIdx].name;
-    this.editDescription = this.progects[this.editIdx].description;
+    this.editDescription = this.progects[this.editIdx].description;*/
   }
 
+  // test commit
   onSubmitCreateProduct(e: any) {
     e.preventDefault();
     if (this.inputNameProgect != "") {
@@ -73,8 +92,14 @@ export class ProgectsComponent implements OnInit {
 
   onSubmitEditProduct(e: any) {
     e.preventDefault();
-    this.progects[this.editIdx].name = this.editName;
-    this.progects[this.editIdx].description = this.editDescription
+    //currentProject.name
+    
+    console.log(this.currentProject);
+    this.editIdx = this.progects.indexOf(this.currentProject);
+    console.log(this.editIdx);
+    let tempProject:Progect=new Progect(this.currentProject);
+    this.progects[this.editIdx].name = this.currentProject.name;
+    this.progects[this.editIdx].description = this.currentProject.description;
     this.toggleEditProgect = true;
   }
 
@@ -88,15 +113,6 @@ export class ProgectsComponent implements OnInit {
     console.log(this.idxProgect);
   }
 
-  ngOnInit(): void {
-    this.getProgects();
-
-    console.log(this.progects);
-    // this.progectsService.passedData.next(this.idxProgect);
-    // this.progectsService.set('progects', this.progects).subscribe((data: any) => {
-    //   console.log(data);
-    // });
-    localStorage.setItem('progects', JSON.stringify(Progects));
-  }
+  
 
 }

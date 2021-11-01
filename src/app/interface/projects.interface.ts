@@ -3,6 +3,15 @@ export class Progect {
     name: string = "";
     description: string = "";
     tasks: Task[] = [];
+    constructor(project?:Progect){
+        if(project){
+            this.id=project.id;
+            this.name=project.name;
+            this.description=project.description;
+            this.tasks=project.tasks;
+        }
+
+    }
 }
 
 export class Task {
