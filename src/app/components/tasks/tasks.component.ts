@@ -14,22 +14,24 @@ import { Projects } from '../../data/projects.data';
 export class TasksComponent implements OnInit {
    index: number = 0; 
    project: Project = new Project();
-   
+   projects: Project[] = [];
    constructor(public projectsService: ProjectsService) {
       this.getProjects();
    }
 
    getProjects(): void {
-     this.index = this.projectsService.index;
-     this.project = Projects[this.index];
+     this.projectsService.getProjects().subscribe(data => this.projects = data);
+      this.index = this.projectsService.getIndex();
+      this.project = this.projects[this.index];
    }
 
+   
    test() {
      console.log(this.project);
    }
 
    ngOnInit(): void {
-        
+      
    }
    
 }

@@ -4,13 +4,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TasksComponent } from './components/tasks/tasks.component';
-
+import { ProjectsComponent } from './components/projects/projects.component';
+import { ProjectsService } from './service/projects.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TasksComponent
+   
+    
 
   ],
   imports: [
@@ -19,7 +21,7 @@ import { TasksComponent } from './components/tasks/tasks.component';
     FormsModule,
     
   ],
-  providers: [],
+  providers: [ProjectsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

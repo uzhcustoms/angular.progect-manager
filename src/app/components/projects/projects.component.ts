@@ -24,8 +24,7 @@ export class ProjectsComponent implements OnInit {
     task: new FormControl([]),
   });
   path: string = 'tasks';
- 
-  
+   
   constructor(private projectsService: ProjectsService, private router: Router    ) { 
     this.getProjects();
   }
@@ -78,8 +77,8 @@ export class ProjectsComponent implements OnInit {
     this.projectForm.reset();
   }
 
-  getItem(index: number) {
-    this.projectsService.index = index;
+  getItemIndex(index: number) {
+    this.projectsService.setIndex(index);
   }
 
   navigate(path: string) {

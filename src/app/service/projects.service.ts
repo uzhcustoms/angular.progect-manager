@@ -14,4 +14,12 @@ export class ProjectsService {
   getProjects(): Observable<Project[]> {
     return of(Projects)
   }
-}
+
+  setIndex(val: number) {
+    this.index = val;
+  }
+
+  getIndex() {
+    return this.index;
+  }
+} 
