@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Project } from '../../models/project.model';
 import { ProjectsService } from '../../service/projects.service';
 import { Projects } from '../../data/projects.data';
-import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute} from '@angular/router';
 @Component({
@@ -24,9 +23,8 @@ export class ProjectsComponent implements OnInit {
     description: new FormControl(''),
     tasks: new FormControl([]),
   });
-  // path: string = 'project/:id';
-   
-  constructor(private projectsService: ProjectsService, private router: Router, private activateRoute: ActivatedRoute   ) { 
+     
+  constructor(private projectsService: ProjectsService, private activateRoute: ActivatedRoute   ) { 
     this.getProjects();
   }
 
@@ -81,8 +79,4 @@ export class ProjectsComponent implements OnInit {
   getItemIndex(index: number) {
      this.activateRoute.snapshot.params['id'];
   }
-
-  // navigate(path: string) {
-  //   this.router.navigate([path])
-  // }
 }
