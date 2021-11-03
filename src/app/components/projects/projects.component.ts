@@ -8,7 +8,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.css']
+  styleUrls: ['./projects.component.css'],
+  
 })
 export class ProjectsComponent implements OnInit {
 
