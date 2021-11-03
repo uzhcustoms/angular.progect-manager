@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { Project } from '../../models/project.model';
 import { ProjectsService } from '../../service/projects.service';
 import { Projects } from '../../data/projects.data';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-
+import { ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
@@ -12,7 +12,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   
 })
 export class ProjectsComponent implements OnInit {
-
+  id: number = 0;
   adding: boolean = false;
   editing: boolean = false;
   editingIndex: number = 0;
@@ -24,9 +24,9 @@ export class ProjectsComponent implements OnInit {
     description: new FormControl(''),
     task: new FormControl([]),
   });
-  path: string = 'tasks';
+  path: string = 'project/:id';
    
-  constructor(private projectsService: ProjectsService, private router: Router    ) { 
+  constructor(private projectsService: ProjectsService, private router: Router, private activateRoute: ActivatedRoute   ) { 
     this.getProjects();
   }
 
@@ -79,7 +79,9 @@ export class ProjectsComponent implements OnInit {
   }
 
   getItemIndex(index: number) {
-    this.projectsService.setIndex(index);
+  //  this.id = index;
+   this.activateRoute.snapshot.params['id'];
+   
   }
 
   navigate(path: string) {

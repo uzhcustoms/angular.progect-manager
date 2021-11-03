@@ -9,17 +9,16 @@ import { of } from 'rxjs';
 })
 export class ProjectsService {
   index: number = 0;
+  project = Project;
+  
   constructor() {}
 
   getProjects(): Observable<Project[]> {
     return of(Projects)
   }
 
-  setIndex(val: number) {
-    this.index = val;
-  }
-
-  getIndex() {
-    return this.index;
+  getProjectById(id: number): Observable<Project> {
+    let project: Project = <Project>Projects.find((projectItem: Project) => projectItem.id == id);
+    return of(project)
   }
 } 

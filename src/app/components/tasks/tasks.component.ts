@@ -1,8 +1,8 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { ProjectsService } from '../../service/projects.service';
-import { Task } from '../../models/task.model';
 import { Project } from '../../models/project.model';
 import { Projects } from '../../data/projects.data';
+import { ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -12,26 +12,22 @@ import { Projects } from '../../data/projects.data';
 })
 
 export class TasksComponent implements OnInit {
-   index: number = 0; 
-   project: Project = new Project();
+   id: number = 0; 
+   project: Project;
    projects: Project[] = [];
-   constructor(public projectsService: ProjectsService) {
-      this.getProjects();
+
+   constructor(public projectsService: ProjectsService,
+    private activateRoute: ActivatedRoute) {
+      this.getProject();
    }
 
-   getProjects(): void {
-     this.projectsService.getProjects().subscribe(data => this.projects = data);
-      this.index = this.projectsService.getIndex();
-      this.project = this.projects[this.index];
-   }
-
-   
-   test() {
-     console.log(this.project);
-   }
-
+    getProject(): void {
+      this.activateRoute.params.subscribe(params=> this.id = params['id']);
+      this.project = this.projects[this.id];
+    }
+  
    ngOnInit(): void {
-      
+      this.projectsService.getProjectById(this.id).subscribe((project: Project)=> this.project = project);
    }
    
 }
