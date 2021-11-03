@@ -4,17 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./_pages/progects/progects.module').then(m => m.ProgectsModule)
+    loadChildren: () => import('./modules/projects.module').then(m => m.ProjectsModule)
   },
   {
-    path: 'progects',
-    loadChildren: () => import('./_pages/progects/progects.module').then(m => m.ProgectsModule)
+    path: 'projects',
+    loadChildren: () => import('./modules/projects.module').then(m => m.ProjectsModule)
   },
-  // {
-  //   path: 'tasks',
-  //   loadChildren: () => import('./_pages/tasks/tasks.module').then(m => m.TasksModule)
-  // }
-];
+ ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonsNav } from './interface/projects.interface'
+import { ButtonsNav } from './models/buttons.models'
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,23 +8,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = "Progect manager";
-  // idxProgect: number = 0;
-
+  title = "Project manager";
+  
   navButtons: ButtonsNav[] = [
     {
       buttonName: "home",
       path: '',
     },
     {
-      buttonName: "progects",
-      path: 'progects',
+      buttonName: "projects",
+      path: 'projects',
     }
   ];
 
   constructor(private router: Router) { }
 
-  navigate(path: any) {
+  navigate(path: string) {
     this.router.navigate([path])
   }
 }

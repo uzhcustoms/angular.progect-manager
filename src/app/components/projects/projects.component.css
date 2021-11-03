@@ -1,0 +1,58 @@
+h3 {
+  margin-bottom: 10px;
+}
+
+table {
+  border: 1px solid rgb(155, 155, 155);
+  padding: 15px;
+  padding-top: 0;
+}
+
+tr,
+th {
+  text-align: center;
+  padding: 20px;
+}
+
+.projects {
+  margin-left: 100px;
+}
+
+.title-project {
+  text-align: center;
+  font-weight: bold;
+}
+
+.new-project {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+label {
+  padding: 10px;
+  text-align: center;
+  width: 25%;
+}
+
+input[type="text"] {
+  padding: 7px;
+}
+
+#btnSave,
+#btnCancel {
+  width: 45%;
+  margin: 5px;
+  padding: 5px;
+}
+
+.name-project:hover {
+  background-color: rgb(219, 219, 219);
+  border-radius: 5px;
+  transform: scale(1.1, 1.1);
+}
+
+#addBtn {
+  margin: 10px;
+  margin-left: 180px;
+}

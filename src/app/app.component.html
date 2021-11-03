@@ -1,9 +1,9 @@
 <h1>{{title}}</h1>
 
 <div class="container">
-    <div class="nav">
-        <button *ngFor="let button of navButtons" (click)="navigate(button.path)">{{button.buttonName}}</button>
-    </div>
+  <div class="nav">
+    <button *ngFor="let button of navButtons" (click)="navigate(button.path)">{{button.buttonName}}</button>
+  </div>
 
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>

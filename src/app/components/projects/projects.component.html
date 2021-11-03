@@ -1,0 +1,39 @@
+<div class="projects">
+    <h3>Projects</h3>
+    <button id="addBtn" (click)="adding = !adding"> Add New Project</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of projects; let i = index;">
+                <td class="name-project" (click)=" navigate(path); getItem(i)" > {{ item.name }}         </td>
+                <td> {{ item.description }} </td>
+                <td> <button (click)="setEditForm(item, i)">Edit</button>
+                    <button (click)="onDelete(i)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form *ngIf="adding || editing" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+        <p class="title-project">{{!editing ? "Create new project" : "Edit project"}}</p>
+        <div class="new-project">
+    
+            <label for="nameProject">Name</label>
+            <input id="nameProject" formControlName="name" type="text" placeholder="Project name">
+        </div>
+        <div class="new-project">
+            <label for="descriptionProject">Description</label>
+            <input id="descriptionProject" formControlName="description" type="text" placeholder="Project description">
+        </div>
+           
+        <button id="btnSave" type="submit">Save</button>
+        <button id="btnCancel" (click)="exitForm()">Cancel</button>
+    
+    </form>
+</div>

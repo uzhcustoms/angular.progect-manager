@@ -1,9 +1,9 @@
-import { Progect } from '../interface/projects.interface';
+import { Project } from '../models/project.model';
 
-export const Progects: Progect[] = [
+export const Projects: Project[] = [
     {
         id: 1,
-        name: "Progect 1",
+        name: "Project 1",
         description: "Text 1",
         tasks: [{ id: 1, name: "Tasks 1", projectId: 1, description: "Text task 1", comments: "Comments task 1" },
         { id: 2, name: "Tasks 2", projectId: 1, description: "Text task 2", comments: "Comments task 2" },
@@ -14,7 +14,7 @@ export const Progects: Progect[] = [
     },
     {
         id: 2,
-        name: "Progect 2",
+        name: "Project 2",
         description: "Text 2",
         tasks: [{ id: 1, name: "Tasks 1", projectId: 2, description: "Text task 1", comments: "Comments task 1" },
         { id: 2, name: "Tasks 2", projectId: 2, description: "Text task 2", comments: "Comments task 2" },
@@ -25,7 +25,7 @@ export const Progects: Progect[] = [
     },
     {
         id: 3,
-        name: "Progect 3",
+        name: "Project 3",
         description: "Text 3",
         tasks: [{ id: 1, name: "Tasks 1", projectId: 3, description: "Text task 1", comments: "Comments task 1" },
         { id: 2, name: "Tasks 2", projectId: 3, description: "Text task 2", comments: "Comments task 2" },
@@ -36,7 +36,7 @@ export const Progects: Progect[] = [
     },
     {
         id: 4,
-        name: "Progect 4",
+        name: "Project 4",
         description: "Text 4",
         tasks: [{ id: 1, name: "Tasks 1", projectId: 4, description: "Text task 1", comments: "Comments task 1" },
         { id: 2, name: "Tasks 2", projectId: 4, description: "Text task 2", comments: "Comments task 2" },
@@ -47,7 +47,7 @@ export const Progects: Progect[] = [
     },
     {
         id: 5,
-        name: "Progect 5",
+        name: "Project 5",
         description: "Text 5",
         tasks: [{ id: 1, name: "Tasks 1", projectId: 5, description: "Text task 1", comments: "Comments task 1" },
         { id: 2, name: "Tasks 2", projectId: 5, description: "Text task 2", comments: "Comments task 2" },
@@ -58,7 +58,7 @@ export const Progects: Progect[] = [
     },
     {
         id: 6,
-        name: "Progect 6",
+        name: "Project 6",
         description: "Text 6",
         tasks: [{ id: 1, name: "Tasks 1", projectId: 6, description: "Text task 1", comments: "Comments task 1" },
         { id: 2, name: "Tasks 2", projectId: 6, description: "Text task 2", comments: "Comments task 2" },
@@ -69,7 +69,7 @@ export const Progects: Progect[] = [
     },
     {
         id: 7,
-        name: "Progect 7",
+        name: "Project 7",
         description: "Text 7",
         tasks: [{ id: 1, name: "Tasks 1", projectId: 7, description: "Text task 1", comments: "Comments task 1" },
         { id: 2, name: "Tasks 2", projectId: 7, description: "Text task 2", comments: "Comments task 2" },
