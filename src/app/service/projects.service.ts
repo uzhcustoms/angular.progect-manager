@@ -8,9 +8,6 @@ import { of } from 'rxjs';
   providedIn: 'root'
 })
 export class ProjectsService {
-  index: number = 0;
-  project = Project;
-  
   constructor() {}
 
   getProjects(): Observable<Project[]> {

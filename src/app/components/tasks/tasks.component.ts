@@ -29,5 +29,9 @@ export class TasksComponent implements OnInit {
    ngOnInit(): void {
       this.projectsService.getProjectById(this.id).subscribe((project: Project)=> this.project = project);
    }
+
+   test() {
+     console.log(this.project)
+   }
    
 }
