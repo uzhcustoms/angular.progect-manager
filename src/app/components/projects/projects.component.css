@@ -11,11 +11,16 @@ table {
 tr,
 th {
   text-align: center;
-  padding: 20px;
+  padding: 25px;
+}
+
+td {
+  padding: 3px 10px;
 }
 
 .projects {
   margin-left: 100px;
+  margin-top: 45px;
 }
 
 .title-project {
@@ -43,16 +48,73 @@ input[type="text"] {
 #btnCancel {
   width: 45%;
   margin: 5px;
-  padding: 5px;
+  padding: 8px;
+  background-color: rgb(121, 173, 173);
+  border-radius: 2px;
+
+  border: none;
+  color: white;
 }
 
-.name-project:hover {
-  background-color: rgb(219, 219, 219);
-  border-radius: 5px;
+#btnSave:hover,
+#btnCancel:hover {
   transform: scale(1.1, 1.1);
 }
 
-#addBtn {
-  margin: 10px;
-  margin-left: 180px;
+#btnSave {
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+#btnCancel {
+  margin-left: 10px;
+  background-color: rgb(209, 179, 115);
+}
+
+.name-project:hover {
+  background-color: rgb(121, 173, 173);
+  border-radius: 2px;
+  transform: scale(1.1, 1.1);
+  color: white;
+}
+
+.title-addBtn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.editBtn,
+.deleteBtn,
+.addBtn {
+  padding: 3px 10px;
+}
+
+.editBtn:hover,
+.deleteBtn:hover,
+.addBtn:hover {
+  transform: scale(1.1, 1.1);
+}
+
+.editBtn,
+.deleteBtn,
+.addBtn {
+  background-color: rgb(121, 173, 173);
+  border: none;
+  color: white;
+  border-radius: 2px;
+}
+
+.deleteBtn {
+  background-color: rgb(209, 179, 115);
+}
+
+.editBtn {
+  margin-right: 10px;
+}
+
+.addBtn {
+  margin-left: auto;
+  padding: 10px;
+  margin-bottom: 8px;
 }

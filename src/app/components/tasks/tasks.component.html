@@ -1,8 +1,10 @@
 <div class="tasks">
     <h3>{{project.name}}</h3>
 
-    <h4>Tasks</h4>
-    <button (click)="adding = !adding"> Add New Task</button>
+    <div class="title-addBtn">
+        <h4>Tasks</h4>
+        <button class="addBtn" (click)="adding = !adding"> Add New Task</button>
+    </div>
 
     <table *ngIf="project.tasks.length > 0">
         <thead>
@@ -19,8 +21,8 @@
                 </td>
                 <td> {{ task.description }} </td>
                 <td> {{ task.comments }} </td>
-                <td> <button (click)="setEditForms(task, id)">Edit</button>
-                     <button (click)="onDelete(id)">Delete</button>
+                <td class="btns"> <button class="editBtn" (click)="setEditForms(task, id)">Edit</button>
+                     <button class="deleteBtn"  (click)="onDelete(id)">Delete</button>
                 </td>
             </tr>
         </tbody>
