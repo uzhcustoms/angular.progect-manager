@@ -76,7 +76,7 @@ export class ProjectsComponent implements OnInit {
     this.projectForm.reset();
   }
 
-  getItemIndex(index: number) {
+  getItemIndex() {
      this.activateRoute.snapshot.params['id'];
   }
 }
