@@ -30,11 +30,15 @@ export class TasksComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      this.projectsService.getProjectById(this.id).subscribe((project: Project)=> this.project = project);
+       
+      //  this.projectsService.getProjectById(this.id).subscribe((project: Project)=> this.project = project);
+
+       this.projectsService.getProjects().subscribe(data => console.log(data[this.id]));
     }
 
     getProject(): void {
       this.activateRoute.params.subscribe(params=> this.id = params['id']);
+      this.projectsService.getProjects().subscribe(data => this.project = data[this.id]);
     }
   
     onSubmit() {

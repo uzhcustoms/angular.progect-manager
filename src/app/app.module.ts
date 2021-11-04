@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProjectsService } from './service/projects.service';
 import { TasksComponent } from './components/tasks/tasks.component';
-
-
+import { DemoMaterialModule } from './material-module';
+import { HttpClientModule }   from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +16,9 @@ import { TasksComponent } from './components/tasks/tasks.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DemoMaterialModule,
+    HttpClientModule
   ],
   providers: [ProjectsService],
   bootstrap: [AppComponent]
