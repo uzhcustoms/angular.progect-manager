@@ -18,8 +18,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProjectsRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    
-    
   ],
   providers: [
     ProjectsService

@@ -2,7 +2,7 @@
     <h3>{{project.name}}</h3>
 
     <h4>Tasks</h4>
-    <button > Add New Project</button>
+    <button (click)="adding = !adding"> Add New Task</button>
 
     <table *ngIf="project.tasks.length > 0">
         <thead>
@@ -14,16 +14,38 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let task of project.tasks">
+            <tr *ngFor="let task of project.tasks; let id = index;">
                 <td class="name-task"> {{ task.name }}
                 </td>
                 <td> {{ task.description }} </td>
                 <td> {{ task.comments }} </td>
-                <td> <button >Edit</button><button>Delete</button>
+                <td> <button (click)="setEditForms(task, id)">Edit</button>
+                     <button (click)="onDelete(id)">Delete</button>
                 </td>
             </tr>
         </tbody>
     </table>
+
+    <form *ngIf="adding || editing" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <p class="title-task">{{!editing ? "Create new task" : "Edit task"}}</p>
+        <div class="new-task">
+    
+            <label for="nameTask">Name</label>
+            <input id="nameTask" formControlName="name" type="text" placeholder="Task name">
+        </div>
+        <div class="new-task">
+            <label for="descriptionTask">Description</label>
+            <input id="descriptionTask" formControlName="description" type="text" placeholder="Task description">
+        </div>
+        <div class="new-task">
+            <label for="commentTask">Description</label>
+            <input id="commentTask" formControlName="comments" type="text" placeholder="Task comment">
+        </div>
+    
+        <button id="btnSave" type="submit">Save</button>
+        <button id="btnCancel" (click)="exitForm()">Cancel</button>
+    
+    </form>
 
    
     

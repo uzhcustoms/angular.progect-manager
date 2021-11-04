@@ -1,6 +1,6 @@
 <div class="projects">
     <h3>Projects</h3>
-    <button id="addBtn" (click)="adding = !adding"> Add New Project</button>
+    <button id="addBtn" (click)="adding = !adding; "> Add New Project</button>
 
     <table>
         <thead>
@@ -12,7 +12,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of projects; let id = index;">
-                <td class="name-project" (click)="  getItemIndex()" [routerLink]="['project', item.id]"> {{ item.name }}         </td>
+                <td class="name-project" (click)="  getItemIndex();" [routerLink]="['project', item.id]"> {{ item.name }}         </td>
                 <td> {{ item.description }} </td>
                 <td> <button (click)="setEditForm(item, id)">Edit</button>
                     <button (click)="onDelete(id)">Delete</button></td>

@@ -44,7 +44,7 @@ export class ProjectsComponent implements OnInit {
           this.projects.splice(this.editingIndex, 1, project);
       } else {
           this.projectForm.value.id = maxId + 1;
-          this.projectForm.value.task = [];
+          this.projectForm.value.tasks = [];
           this.projects.push(project);
       }
     }
