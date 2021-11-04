@@ -5,7 +5,7 @@
         <button class="addBtn" (click)="adding = !adding; "> Add New Project</button>
     </div>
 
-    <table>
+    <table *ngIf="projects.length > 0">
         <thead>
             <tr>
                 <th>Name</th>
