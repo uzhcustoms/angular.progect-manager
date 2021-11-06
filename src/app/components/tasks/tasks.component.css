@@ -1,5 +1,6 @@
 .tasks {
   margin-left: 100px;
+  margin-top: 30px;
 }
 
 h3 {
@@ -12,15 +13,23 @@ h4 {
 }
 
 table {
-  border: 1px solid rgb(155, 155, 155);
+  box-shadow: 0 0 4px 4px rgb(212, 212, 212);
   padding: 15px;
   padding-top: 0;
+  margin-top: 15px;
+  border-collapse: collapse;
 }
 
 tr,
 th {
   text-align: center;
   padding: 20px;
+  color: rgb(57, 117, 117);
+}
+
+td {
+  padding: 10px 20px;
+  border-bottom: 1px solid rgb(206, 206, 206);
 }
 
 .btns {
@@ -70,6 +79,7 @@ input[type="text"] {
 
 .title-task {
   margin-top: 25px;
+  color: rgb(57, 117, 117);
 }
 
 .editBtn,
@@ -131,4 +141,9 @@ input[type="text"] {
 #btnCancel {
   margin-left: 10px;
   background-color: rgb(209, 179, 115);
+}
+
+.formInputs {
+  display: flex;
+  flex-direction: column;
 }

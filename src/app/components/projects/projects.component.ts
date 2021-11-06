@@ -4,6 +4,8 @@ import { ProjectsService } from '../../service/projects.service';
 import { Projects } from '../../data/projects.data';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute} from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
@@ -11,6 +13,7 @@ import { ActivatedRoute} from '@angular/router';
   
 })
 export class ProjectsComponent implements OnInit {
+  
   id: number = 0;
   adding: boolean = false;
   editing: boolean = false;
@@ -23,18 +26,33 @@ export class ProjectsComponent implements OnInit {
     description: new FormControl(''),
     tasks: new FormControl([]),
   });
+
+ 
+  displayedColumns: string[] = ['name', 'description', 'id'];
+  dataSource:Project[]=[];
+  // dataSorce: projects;
      
   constructor(private projectsService: ProjectsService, private activateRoute: ActivatedRoute   ) { 
     this.getProjects();
   }
 
   ngOnInit(): void {
-    localStorage.setItem('projects', JSON.stringify(Projects));
+    // this.refresh()
+    // localStorage.setItem('projects', JSON.stringify(this.projects));
   }
 
   getProjects(): void {
-    this.projectsService.getProjects().subscribe(data => this.projects = data);
+    this.projectsService.getProjects().subscribe((data: Project[]) => {
+      this.projects = data;
+      this.projectListTableRefresh();
+     } );
   }
+
+  // refresh() {
+  //   this.projectsService.getProjects().subscribe((data: Project[]) => {
+  //     this.dataSource.data = data;
+  //   });
+  // }
 
   onSubmit() {
     const maxId = Math.max(...this.projects.map(item => item.id), 0);
@@ -48,7 +66,7 @@ export class ProjectsComponent implements OnInit {
           this.projects.push(project);
       }
     }
-   
+   this.projectListTableRefresh();
     console.log(this.projects)
     this.editing = false;
     this.adding = false;
@@ -68,6 +86,7 @@ export class ProjectsComponent implements OnInit {
 
   onDelete(index: number) {
     this.projects.splice(index, 1);
+    console.log(this.projects)
   }
 
   exitForm() {
@@ -78,5 +97,12 @@ export class ProjectsComponent implements OnInit {
 
   getItemIndex() {
      this.activateRoute.snapshot.params['id'];
+  }
+
+  private projectListTableRefresh(){
+    this.dataSource = [];
+    setTimeout(()=>{
+      this.dataSource=this.projects;
+    },100);
   }
 }

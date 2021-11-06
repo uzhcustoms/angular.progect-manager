@@ -7,6 +7,8 @@ import { ProjectsService } from './service/projects.service';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { DemoMaterialModule } from './material-module';
 import { HttpClientModule }   from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +20,9 @@ import { HttpClientModule }   from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     DemoMaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    
   ],
   providers: [ProjectsService],
   bootstrap: [AppComponent]

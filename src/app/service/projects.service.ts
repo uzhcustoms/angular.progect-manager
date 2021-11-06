@@ -25,8 +25,7 @@ export class ProjectsService {
   
    getProjects() {
     return this.getHttpData<Project[]>(this.projectsUrl).pipe<Project[]>(
-      map(
-      (projects: Project[]) => {
+      map((projects: Project[]) => {
           return projects.map((project: Project) => new Project(project))
       }
       )
