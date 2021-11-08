@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../../models/project.model';
 import { ProjectsService } from '../../service/projects.service';
-import { Projects } from '../../data/projects.data';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
 import { ActivatedRoute} from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
+import { Projects } from '../../data/projects.data';
 
 @Component({
   selector: 'app-projects',
@@ -14,30 +14,27 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ProjectsComponent implements OnInit {
   
-  id: number = 0;
-  adding: boolean = false;
-  editing: boolean = false;
-  editingIndex: number = 0;
+  public id: number = 0;
+  public adding: boolean = false;
+  public editing: boolean = false;
+  public editingIndex: number = 0;
 
-  projects: Project[]=[];
-  projectForm = new FormGroup({
+  public projects: Project[] = [];
+  public projectForm = new FormGroup({
     id: new FormControl(0),
-    name: new FormControl(''),
+    name: new FormControl('', [Validators.required, Validators.pattern(/^.{2,35}$/)]),
     description: new FormControl(''),
     tasks: new FormControl([]),
   });
-
  
-  displayedColumns: string[] = ['name', 'description', 'id'];
-  dataSource:Project[]=[];
-  // dataSorce: projects;
-     
-  constructor(private projectsService: ProjectsService, private activateRoute: ActivatedRoute   ) { 
+  public displayedColumns: string[] = ['name', 'description', 'id'];
+  public dataSource: Project[] = [];
+       
+  constructor(private projectsService: ProjectsService, private activateRoute: ActivatedRoute, private fb: FormBuilder,  ) { 
     this.getProjects();
   }
 
   ngOnInit(): void {
-    // this.refresh()
     // localStorage.setItem('projects', JSON.stringify(this.projects));
   }
 
@@ -48,13 +45,7 @@ export class ProjectsComponent implements OnInit {
      } );
   }
 
-  // refresh() {
-  //   this.projectsService.getProjects().subscribe((data: Project[]) => {
-  //     this.dataSource.data = data;
-  //   });
-  // }
-
-  onSubmit() {
+  saveDataProjects() {
     const maxId = Math.max(...this.projects.map(item => item.id), 0);
     const project = this.projectForm.value as Project;
     if ( this.projectForm.value.name != "") {
@@ -86,6 +77,7 @@ export class ProjectsComponent implements OnInit {
 
   onDelete(index: number) {
     this.projects.splice(index, 1);
+    this.projectListTableRefresh();
     console.log(this.projects)
   }
 
@@ -103,6 +95,6 @@ export class ProjectsComponent implements OnInit {
     this.dataSource = [];
     setTimeout(()=>{
       this.dataSource=this.projects;
-    },100);
+    },50);
   }
 }

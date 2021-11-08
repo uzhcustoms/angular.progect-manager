@@ -34,6 +34,16 @@ td {
   color: rgb(57, 117, 117);
 }
 
+.project-name:hover {
+  background-color: rgb(121, 173, 173);
+  transform: scale(1.05, 1.05);
+  color: white;
+}
+
+.project-description {
+  padding-left: 20px;
+}
+
 .new-project {
   display: flex;
   flex-direction: row;
@@ -135,4 +145,9 @@ input[type="text"] {
 form {
   margin-top: 20px;
   margin-bottom: 30px;
+}
+
+.alert-danger {
+  color: red;
+  margin-bottom: 20px;
 }

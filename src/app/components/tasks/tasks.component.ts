@@ -4,7 +4,6 @@ import { Project } from '../../models/project.model';
 import { Task } from 'src/app/models/task.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute} from '@angular/router';
-// import json from '../../../assets/projects.json';
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -25,29 +24,28 @@ export class TasksComponent implements OnInit {
     comments: new FormControl(''),
   });
 
-  // projects: any = json;
+  displayedColumns: string[] = ['name', 'description', 'comments', 'id'];
+  dataSource: any;
 
   constructor(public projectsService: ProjectsService,
     private activateRoute: ActivatedRoute) {
       this.getProject();
-     
     }
 
     ngOnInit(): void {
-       
-      //  this.projectsService.getProjectById(this.id).subscribe((project: Project)=> this.project = project);
       this.projectsService.getProjects().subscribe(data => console.log(data[this.id]));
     }
 
     getProject(): void {
-      // debugger
-      this.activateRoute.params.subscribe(params=> this.id = params['id']);
-      console.log(this.id)
-      this.projectsService.getProjects().subscribe(data => this.project = data[this.id]);
       
+      this.activateRoute.params.subscribe(params=> this.id = params['id']);
+      this.projectsService.getProjects().subscribe((data: Project[]) => {
+        this.project = data[this.id];
+        this.projectListTableRefresh();
+      });
     }
   
-    onSubmit() {
+    saveDataProjects() {
     const maxId = Math.max(...this.project.tasks.map(item => item.id), 0);
     const tasks = this.taskForm.value as Task;
     if ( this.taskForm.value.name != "") {
@@ -59,14 +57,14 @@ export class TasksComponent implements OnInit {
           this.project.tasks.push(tasks);
       }
     }
-   
+    this.projectListTableRefresh();
     console.log(this.project)
     this.editing = false;
     this.adding = false;
     this.exitForm();
   }
 
-  setEditForms(task: Task, index: number) {
+  setEditForm(task: Task, index: number) {
     this.taskForm.patchValue({
       id: task.id,
       name: task.name,
@@ -80,6 +78,7 @@ export class TasksComponent implements OnInit {
 
   onDelete(index: number) {
     this.project.tasks.splice(index, 1);
+    this.projectListTableRefresh();
   }
 
   exitForm() {
@@ -90,6 +89,12 @@ export class TasksComponent implements OnInit {
 
   test() {
     this.projectsService.getProjects().subscribe(data => console.log(data));
-    
+  }
+
+  private projectListTableRefresh(){
+    this.dataSource = [];
+    setTimeout(()=>{
+      this.dataSource=this.project.tasks;
+    },50);
   }
 }

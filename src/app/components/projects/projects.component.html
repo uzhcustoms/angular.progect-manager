@@ -5,36 +5,16 @@
         <button class="addBtn" (click)="adding = !adding; "> Add New Project</button>
     </div>
 
-    <!-- <table *ngIf="projects.length > 0">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of projects; let id = index;">
-                <td class="name-project" (click)="  getItemIndex();" [routerLink]="['project', id]" > {{ item.name }}         </td>
-                              
-                <td> {{ item.description }} </td>
-                <td> <button class="editBtn" (click)="setEditForm(item, id)">Edit</button>
-                    <button class="deleteBtn" (click)="onDelete(id)">Delete</button></td>
-            </tr>
-        </tbody>
-    </table> -->
-
-
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         
         <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-            <mat-cell *matCellDef="let element; let id = index" (click)="  getItemIndex();" [routerLink]="['project', id]"> {{element.name}} </mat-cell>
+            <mat-cell class="project-name" *matCellDef="let element; let id = index" (click)="  getItemIndex();" [routerLink]="['project', id]"> {{element.name}} </mat-cell>
         </ng-container>
-    
+
         <ng-container matColumnDef="description">
             <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+            <mat-cell class="project-description"*matCellDef="let element"> {{element.description}} </mat-cell>
         </ng-container>
     
         <ng-container matColumnDef="id">
@@ -49,30 +29,17 @@
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
 
-    <!-- <form *ngIf="adding || editing" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
-        <p class="title-project">{{!editing ? "Create new project" : "Edit project"}}</p>
-        <div class="new-project">
-    
-            <label for="nameProject">Name</label>
-            <input id="nameProject" formControlName="name" type="text" placeholder="Project name">
-        </div>
-        <div class="new-project">
-            <label for="descriptionProject">Description</label>
-            <input id="descriptionProject" formControlName="description" type="text" placeholder="Project description">
-        </div>
-           
-        <button id="btnSave" type="submit">Save</button>
-        <button id="btnCancel" (click)="exitForm()">Cancel</button>
-    
-    </form> -->
-
-    <form *ngIf="adding || editing" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+    <form *ngIf="adding || editing" [formGroup]="projectForm" (ngSubmit)="saveDataProjects()" validate>
         <p class="title-project">{{!editing ? "Create new project" : "Edit project"}}</p>
        <div class="formInputs">
-            <mat-form-field  appearance="outline">
+            <mat-form-field appearance="outline">
                 <mat-label>Name</mat-label>
                 <input matInput required formControlName="name" type="text">
             </mat-form-field>
+
+            <div class="alert alert-danger" *ngIf="projectForm.controls['name'].invalid && projectForm.controls['name'].touched">
+                Name is not correct
+            </div>
 
             <mat-form-field appearance="outline">
                 <mat-label>Description</mat-label>
@@ -80,7 +47,7 @@
             </mat-form-field>
         </div>
 
-        <button  id="btnSave" color="primary" type="submit">Save</button>
+        <button  id="btnSave" type="submit">Save</button>
         <button  id="btnCancel" (click)="exitForm()">Cancel</button>
     
     </form>

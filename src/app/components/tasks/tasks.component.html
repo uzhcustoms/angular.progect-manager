@@ -6,7 +6,7 @@
         <button class="addBtn" (click)="adding = !adding"> Add New Task</button>
     </div>
 
-    <table *ngIf="project.tasks.length > 0">
+    <!-- <table *ngIf="project.tasks.length > 0">
         <thead>
             <tr>
                 <th>Name</th>
@@ -26,24 +26,41 @@
                 </td>
             </tr>
         </tbody>
-    </table>
+    </table> -->
 
-    <form *ngIf="adding || editing" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-        <p class="title-task">{{!editing ? "Create new task" : "Edit task"}}</p>
-        <!-- <div class="new-task">
+    <mat-table class="mat-table" [dataSource]="dataSource" class="mat-elevation-z8">
     
-            <label for="nameTask">Name</label>
-            <input id="nameTask" formControlName="name" type="text" placeholder="Task name">
-        </div>
-        <div class="new-task">
-            <label for="descriptionTask">Description</label>
-            <input id="descriptionTask" formControlName="description" type="text" placeholder="Task description">
-        </div>
-        <div class="new-task">
-            <label for="commentTask">Description</label>
-            <input id="commentTask" formControlName="comments" type="text" placeholder="Task comment">
-        </div> -->
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell class="task-name" *matCellDef="let element; let id = index"
+                [routerLink]="['project', id]"> {{element.name}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+            <mat-cell class="task-description" *matCellDef="let element"> {{element.description}} </mat-cell>
+        </ng-container>
 
+        <ng-container matColumnDef="comments">
+            <mat-header-cell *matHeaderCellDef> Comments </mat-header-cell>
+            <mat-cell class="task-description" *matCellDef="let element"> {{element.comments}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element, let id = index">
+                <button class="editBtn" (click)="setEditForm(element, id)">Edit</button>
+                <button class="deleteBtn" (click)="onDelete(id)">Delete</button>
+            </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <form *ngIf="adding || editing" [formGroup]="taskForm" (ngSubmit)="saveDataProjects()">
+        <p class="title-task">{{!editing ? "Create new task" : "Edit task"}}</p>
+        
         <div class="formInputs">
             <mat-form-field  appearance="fill">
                 <mat-label>Name</mat-label>
@@ -65,7 +82,4 @@
         <button id="btnCancel" (click)="exitForm()">Cancel</button>
     
     </form>
-
-   
-    
 </div>
