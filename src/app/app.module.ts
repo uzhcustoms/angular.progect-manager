@@ -8,11 +8,12 @@ import { TasksComponent } from './components/tasks/tasks.component';
 import { DemoMaterialModule } from './material-module';
 import { HttpClientModule }   from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { FormComponent } from './components/form/form-component'
 @NgModule({
   declarations: [
     AppComponent,
-    TasksComponent
+    TasksComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
@@ -22,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DemoMaterialModule,
     HttpClientModule,
     BrowserAnimationsModule,
+     
     
   ],
   providers: [ProjectsService],

@@ -35,12 +35,12 @@ export class ProjectsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // localStorage.setItem('projects', JSON.stringify(this.projects));
   }
 
   getProjects(): void {
     this.projectsService.getProjects().subscribe((data: Project[]) => {
       this.projects = data;
+      localStorage.setItem('projects', JSON.stringify(this.projects));
       this.projectListTableRefresh();
      } );
   }
@@ -58,10 +58,7 @@ export class ProjectsComponent implements OnInit {
       }
     }
    this.projectListTableRefresh();
-    console.log(this.projects)
-    this.editing = false;
-    this.adding = false;
-    this.exitForm();
+   this.exitForm();
   }
 
   setEditForm(project: Project, index: number) {
@@ -78,7 +75,7 @@ export class ProjectsComponent implements OnInit {
   onDelete(index: number) {
     this.projects.splice(index, 1);
     this.projectListTableRefresh();
-    console.log(this.projects)
+   
   }
 
   exitForm() {
@@ -87,11 +84,11 @@ export class ProjectsComponent implements OnInit {
     this.projectForm.reset();
   }
 
-  getItemIndex() {
-     this.activateRoute.snapshot.params['id'];
-  }
+  // getItemIndex() {
+  //    this.activateRoute.snapshot.params['id'];
+  // }
 
-  private projectListTableRefresh(){
+  private projectListTableRefresh() {
     this.dataSource = [];
     setTimeout(()=>{
       this.dataSource=this.projects;

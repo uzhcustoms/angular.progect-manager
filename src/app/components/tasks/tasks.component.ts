@@ -4,6 +4,9 @@ import { Project } from '../../models/project.model';
 import { Task } from 'src/app/models/task.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute} from '@angular/router';
+import { FormStatus } from 'src/app/models/form-status.enum';
+
+
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -11,84 +14,67 @@ import { ActivatedRoute} from '@angular/router';
 })
 
 export class TasksComponent implements OnInit {
-  id: number = 0; 
-  project: Project=new Project();
-  adding: boolean = false;
-  editing: boolean = false;
-  editingIndex: number = 0;
-  taskForm = new FormGroup({
-    id: new FormControl(0),
-    name: new FormControl(''),
-    projectId: new FormControl(0),
-    description: new FormControl(''),
-    comments: new FormControl(''),
-  });
+  
+  public formStatus: FormStatus = FormStatus.none;
 
-  displayedColumns: string[] = ['name', 'description', 'comments', 'id'];
-  dataSource: any;
+  public id: number = 0; 
+  public project: Project=new Project();
+  public editingIndex: number = 0;
+  public task: Task = new Task();
+  
+  public displayedColumns: string[] = ['name', 'description', 'comments', 'id'];
+  public dataSource: Task[] = [];
 
   constructor(public projectsService: ProjectsService,
     private activateRoute: ActivatedRoute) {
       this.getProject();
     }
 
-    ngOnInit(): void {
-      this.projectsService.getProjects().subscribe(data => console.log(data[this.id]));
-    }
+  ngOnInit(): void {}
 
-    getProject(): void {
-      
+  getProject(): void {
       this.activateRoute.params.subscribe(params=> this.id = params['id']);
+      // this.projectsService.getProjects().subscribe(data => console.log(data[this.id]));
       this.projectsService.getProjects().subscribe((data: Project[]) => {
         this.project = data[this.id];
         this.projectListTableRefresh();
       });
-    }
+  }
   
-    saveDataProjects() {
+  saveDataTasks(task: Task) {
     const maxId = Math.max(...this.project.tasks.map(item => item.id), 0);
-    const tasks = this.taskForm.value as Task;
-    if ( this.taskForm.value.name != "") {
-      if (this.editing) {
-          this.project.tasks.splice(this.editingIndex, 1, tasks);
+    if (task.name != "") {
+      if (task.id > 0) {
+        this.project.tasks.splice(this.editingIndex, 1, task);
       } else {
-          this.taskForm.value.id = maxId + 1;
-          this.taskForm.value.projectId = this.project.id;
-          this.project.tasks.push(tasks);
+        task.id = maxId + 1;
+        task.projectId = this.project.id;
+        this.project.tasks.push(task);
       }
     }
-    this.projectListTableRefresh();
-    console.log(this.project)
-    this.editing = false;
-    this.adding = false;
-    this.exitForm();
+      this.projectListTableRefresh();
+      console.log(this.project.tasks);
+      this.task = new Task();
+      this.formStatus = FormStatus.none;
+  }
+
+  setAddForm() {
+    this.task = new Task();
+    this.formStatus = FormStatus.add;
+    console.log(`task - ${this.task.id}`);
+    console.log(`formStatus - ${this.formStatus}`);
   }
 
   setEditForm(task: Task, index: number) {
-    this.taskForm.patchValue({
-      id: task.id,
-      name: task.name,
-      projectId: task.projectId,
-      description: task.description,
-      comments: task.comments
-    });
-    this.editing = true;
+    this.task = task;
     this.editingIndex = index;
+    this.formStatus = FormStatus.edit;
+    console.log(`task - ${this.task.id}`);
   }
 
   onDelete(index: number) {
     this.project.tasks.splice(index, 1);
     this.projectListTableRefresh();
-  }
-
-  exitForm() {
-    this.adding = false;
-    this.editing = false;
-    this.taskForm.reset();
-  }
-
-  test() {
-    this.projectsService.getProjects().subscribe(data => console.log(data));
   }
 
   private projectListTableRefresh(){
@@ -97,4 +83,5 @@ export class TasksComponent implements OnInit {
       this.dataSource=this.project.tasks;
     },50);
   }
+   
 }

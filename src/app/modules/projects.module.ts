@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DemoMaterialModule } from '../material-module';
 
+
 @NgModule({
   declarations: [
     ProjectsComponent
@@ -18,7 +19,8 @@ import { DemoMaterialModule } from '../material-module';
     ProjectsRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    DemoMaterialModule
+    DemoMaterialModule,
+   
   ],
   providers: [
     ProjectsService

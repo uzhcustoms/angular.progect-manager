@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TasksRoutingModule } from '../routings/tasks-routing.module';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ProjectsService } from '../service/projects.service';
-
+// import { FormComponent } from '../components/form/form-component';
 @NgModule({
   declarations: [
     TasksComponent
@@ -15,7 +15,8 @@ import { ProjectsService } from '../service/projects.service';
     HttpClientModule,
     FormsModule,
     TasksRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   providers: [
     ProjectsService
