@@ -1,5 +1,5 @@
 <form *ngIf="showForm()" [formGroup]="taskForm" (ngSubmit)="saveForm()">
-    <p class="title-task" ></p>
+    <p class="title-task" >{{showTitleAddForm() ? "Create new task" : "Edit task"}}</p>
     <!-- {{formStatus == formStatus.add ? "Create new task" : "Edit task"}} -->
 
     <div class="formInputs">

@@ -36,6 +36,9 @@
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
 
-    <form-component (taskEvent)="saveDataTasks($event)" [task]="task" [formStatus]="formStatus"></form-component>
+    <form-component (formStatusEvent)="setFormStatus($event)" 
+                    (taskEvent)="saveDataTasks($event)" 
+                    [task]="task" 
+                    [formStatus]="formStatus"></form-component>
     
 </div>

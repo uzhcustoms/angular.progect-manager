@@ -16,7 +16,6 @@ set formStatus(value: FormStatus) {
   this._formStatus = value;
 }
 get formStatus(): FormStatus {
-  console.log(this._formStatus)
   return this._formStatus;
 }
 
@@ -36,6 +35,7 @@ get task(): Task {
 }
 
 @Output() taskEvent = new EventEmitter<Task>();
+@Output() formStatusEvent = new EventEmitter<FormStatus>();
 
 private _task: Task = new Task();
 private _formStatus: FormStatus = FormStatus.none;
@@ -55,6 +55,10 @@ public taskForm = new FormGroup({
   public showForm() {
     return this.formStatus !== FormStatus.none;
   }
+
+  public showTitleAddForm() {
+    return this.formStatus == FormStatus.add;
+  }
   
   saveForm() {
     if (this.formStatus == FormStatus.edit) {
@@ -64,17 +68,16 @@ public taskForm = new FormGroup({
       this.task.name = this.taskForm.value.name;
       this.task.description = this.taskForm.value.description;
       this.task.comments = this.taskForm.value.comments;
-
-    console.log(this.formStatus);      
     this.taskEvent.emit(this.task);
-    console.log(this.task);
     this._task = new Task();
-    this.exitForm();
+    this.formStatus = FormStatus.none;
+    this.taskForm.reset();
   }
   
   exitForm() {
     this.taskForm.reset();
     this.formStatus = FormStatus.none;
+    this.formStatusEvent.emit(this.formStatus);
   }
 }
 

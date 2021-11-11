@@ -16,12 +16,10 @@ import { FormStatus } from 'src/app/models/form-status.enum';
 export class TasksComponent implements OnInit {
   
   public formStatus: FormStatus = FormStatus.none;
-
   public id: number = 0; 
   public project: Project=new Project();
   public editingIndex: number = 0;
   public task: Task = new Task();
-  
   public displayedColumns: string[] = ['name', 'description', 'comments', 'id'];
   public dataSource: Task[] = [];
 
@@ -61,7 +59,6 @@ export class TasksComponent implements OnInit {
   setAddForm() {
     this.task = new Task();
     this.formStatus = FormStatus.add;
-    console.log(`task - ${this.task.id}`);
     console.log(`formStatus - ${this.formStatus}`);
   }
 
@@ -69,7 +66,7 @@ export class TasksComponent implements OnInit {
     this.task = task;
     this.editingIndex = index;
     this.formStatus = FormStatus.edit;
-    console.log(`task - ${this.task.id}`);
+    console.log(`formStatus - ${this.formStatus}`);
   }
 
   onDelete(index: number) {
@@ -82,6 +79,10 @@ export class TasksComponent implements OnInit {
     setTimeout(()=>{
       this.dataSource=this.project.tasks;
     },50);
+  }
+
+  setFormStatus(formStatus: FormStatus) {
+    this.formStatus = formStatus;
   }
    
 }
